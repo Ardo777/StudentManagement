@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update User</title>
+</head>
+<body>
+<h2>Update User</h2>
+<form action="/user/update" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" th:value="${user.id}"/>
+    Name<input type="text" name="name" th:value="${user.name}"/><br/>
+    Email<input type="text" name="email" th:value="${user.email}"/><br/>
+    Password<input type="password" name="password"><br>
+    Lesson<select name="lesson.id">
+    <option th:if="${lessons != null}" th:each="lesson : ${lessons}" th:text="${lesson.title}" th:value="${lesson.id}">
+    </option>
+</select><br>
+    <input type="file" name="picture"><br>
+    <input type="submit" value="Update"/>
+</form>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson</title>
+</head>
+<body>
+<th:block th:include="/fragment/headerFragment::userInfo"/>
+<span th:if="msg != null" style="color: red" th:text="${msg}"></span>
+Lessons page | <a href="/lesson/add">Add Lesson</a>
+<table border="1" >
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Duration</th>
+        <th>Price</th>
+        <th>Start Date</th>
+        <th>Teacher</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="lesson:${lessons}">
+        <td th:text="${lesson.id}"></td>
+        <td th:text="${lesson.title}"></td>
+        <td th:text="${lesson.duration}"></td>
+        <td th:text="${lesson.price}"></td>
+        <td th:text="${lesson.startDate}"></td>
+        <td th:text="${lesson.user?.name}"></td>
+        <td>
+            <div th:if="${currentUser != null and lesson.user != null and currentUser.id == lesson.user.id}">
+                <a th:href="@{'/lesson/update/' + ${lesson.id}}">Update</a>
+            </div>
+        </td>
+        <td>
+            <div th:if="${currentUser != null and lesson.user != null and currentUser.id == lesson.user.id}">
+                <a th:href="@{'/lesson/delete/' + ${lesson.id}}">Delete</a>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

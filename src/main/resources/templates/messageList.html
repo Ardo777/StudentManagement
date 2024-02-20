@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Messages</title>
+</head>
+<body>
+<table border="1" >
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Message</th>
+    <th>From</th>
+    <th>To</th>
+    <th>Date</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="message:${messages}">
+    <td th:text="${message.id}"></td>
+    <td th:text="${message.message}"></td>
+    <td th:text="${message.to.name}"></td>
+    <td th:text="${message.from.name}"></td>
+    <td th:text="${message.dateTime}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

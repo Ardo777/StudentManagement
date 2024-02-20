@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Users</title>
+</head>
+<body>
+<span th:if="msg != null" style="color: red" th:text="${msg}"></span>
+<th:block th:include="/fragment/headerFragment::userInfo"/>
+Users page | <a href="/user/add">Add User</a> | <a href="/messages/list">Messages</a>
+<table border="1">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Picture</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Lesson</th>
+    <th>Type</th>
+    <th>Send Message</th>
+    <th>Update</th>
+    <th>Delete</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="student:${students}">
+    <td th:text="${student.id}"></td>
+    <td>
+      <div th:if="${student.getPicName() != null}">
+        <img alt="text" th:src="@{/getImage(picName=${student.picName})}"  width="50"></div>
+      <p class="no_img" th:if="${student.getPicName() == null}"></p>
+    </td>
+    <td th:text="${student.name}"></td>
+    <td th:text="${student.email}"></td>
+    <td th:text="${student.lesson?.title}"></td>
+    <td th:text="${student.userType}"></td>
+    <td>
+      <div th:if="${currentUser.id != student.id}">
+        <a th:href="@{'/message/send/' + ${student.getId()}}">Send A Message</a>
+      </div>
+    </td>
+    <td>
+      <div th:if="${currentUser.id == student.id}">
+        <a th:href="@{'/user/update/' + ${student.getId()}}">Update</a>
+      </div>
+    </td>
+    <td>
+      <div th:if="${currentUser != null && currentUser.id == student.id}">
+        <a th:href="@{'/user/delete/' + ${student.getId()}}">Delete</a>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
