@@ -24,7 +24,5 @@ public interface UserService {
 
     User update(User user,MultipartFile multipartFile) throws IOException;
 
-//    User register(User user, MultipartFile multipartFile) throws IOException;
-
     void changeUserByLesson(Lesson lesson);
 }

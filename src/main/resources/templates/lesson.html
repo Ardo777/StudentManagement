@@ -5,7 +5,7 @@
     <title>Lesson</title>
 </head>
 <body>
-<th:block th:include="/fragment/headerFragment::userInfo"/>
+<th:block th:insert="/fragment/headerFragment::userInfo"/>
 <span th:if="msg != null" style="color: red" th:text="${msg}"></span>
 Lessons page | <a href="/lesson/add">Add Lesson</a>
 <table border="1" >

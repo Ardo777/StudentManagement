@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mail Verification</title>
+    <link rel="stylesheet" href="/css/language.css">
+</head>
+<body>
+<th:block th:insert="~{/fragment/langFragment::language}"/>
+<h3>Mail Verification</h3>
+The code has been sent to your email please enter your code
+<br><br>
+<form action="/user/register/verification" method="post">
+    <div th:text="#{mailVerification.verificationCode}">
+        Verification Code: </div>
+    <label>
+        <input type="hidden" name="id" th:value="${user.id}" required>
+    </label><br>
+    <label>
+        <input type="text" name="verificationCode" placeholder="Code" required>
+    </label><br>
+        <input type="submit" value="Submit">
+
+</form>
+
+</body>
+</html>

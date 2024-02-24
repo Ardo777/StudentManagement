@@ -13,17 +13,28 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     @Value("${picture.upload.directory}")
+
+
+
+
     private String uploadDirectory;
+
     private final PasswordEncoder passwordEncoder;
+
     private final UserRepository userRepository;
+
+private final MailServiceImpl mailService;
 
     @Override
     public User save(User user, MultipartFile multipartFile) throws IOException {
@@ -37,6 +48,12 @@ public class UserServiceImpl implements UserService {
                 multipartFile.transferTo(file);
                 user.setPicName(picName);
             }
+//            String  message= String.valueOf(System.currentTimeMillis());
+//            String firstSixCharacters = message.substring(0, Math.min(message.length(), 6));
+            String lUUID = String.format("%040d", new BigInteger(UUID.randomUUID().toString().replace("-", ""), 16));
+            String uuid=lUUID.substring(0, Math.min(lUUID.length(), 6));
+            mailService.send(user.getEmail(),"Welcome",String.format("Hi %s , this is your verify code %s ",user.getName(), uuid));
+            user.setVerificationCode(uuid);
             userRepository.save(user);
             return user;
         }
@@ -91,18 +108,6 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-//    @Override
-//    public User register(User user, MultipartFile multipartFile) throws IOException {
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
-//        if (multipartFile != null && !multipartFile.isEmpty()){
-//            String picName = System.currentTimeMillis() + "_" + multipartFile.getOriginalFilename();
-//            File file = new File(uploadDirectory, picName);
-//            multipartFile.transferTo(file);
-//            user.setPicName(picName);
-//        }
-//        user.setUserType(UserType.STUDENT);
-//        return userRepository.save(user);
-//    }
 
     @Override
     public void changeUserByLesson(Lesson lesson) {

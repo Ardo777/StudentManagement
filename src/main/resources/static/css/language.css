@@ -1,0 +1,95 @@
+.top-right {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: white;
+    padding: 10px;
+}
+.dropbtn {
+    padding: 5px;
+    color: black;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    width: 140px;
+}
+dropdown-content{
+    color: black;
+}
+
+
+.dropbtn {
+    background: url("https://icons.iconarchive.com/icons/fatcow/farm-fresh/16/flag-usa-icon.png") no-repeat left center;
+    /*padding-left: 10px;*/
+    /*width: 40px;*/
+padding-left: 25px ;
+}
+
+.dropbtn:before{
+    content: "";
+    left: 50px;
+}
+
+/*.dropbtn::after {*/
+/*    background: rgba(0, 0, 0, 0) url("https://cdn3.iconfinder.com/data/icons/google-material-design-icons/48/ic_keyboard_arrow_down_48px-16.png") no-repeat scroll center center;*/
+/*    content: "  ";*/
+/*    height: 16px;*/
+/*    position: absolute;*/
+/*    left: 42px;*/
+/*    top: 7px;*/
+/*    width: 16px;*/
+/*}*/
+
+.dropbtn.HY{
+    background-image: url("https://flagcdn.com/16x12/am.png") !important;
+}
+.dropbtn.RU{
+    background-image: url("https://icons.iconarchive.com/icons/custom-icon-design/flag-3/16/Russia-Flag-icon.png") !important;
+}
+
+.dropbtn.EN{
+    background-image: url("https://icons.iconarchive.com/icons/fatcow/farm-fresh/16/flag-usa-icon.png") !important;
+}
+
+
+.dropdown-content a:first-child {
+    background: url("https://icons.iconarchive.com/icons/custom-icon-design/flag-3/16/Russia-Flag-icon.png") no-repeat left center;
+}
+
+.dropdown-content a:nth-child(2) {
+    background: url("https://flagcdn.com/16x12/am.png") no-repeat left center;
+}
+
+.dropdown-content a:last-child {
+    background: url("https://icons.iconarchive.com/icons/fatcow/farm-fresh/16/flag-usa-icon.png") no-repeat left center;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 2px 0 2px 25px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: gray;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.collor{
+    color: black;
+}
+
+

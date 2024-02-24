@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+    <title>Lang</title>
+    <link rel="stylesheet" href="/css/language.css">
+</head>
+<body>
+<div th:fragment="language">
+    <div class="top-right">
+        <div class="dropdown">
+<!--                <div th:class=" 'dropbtn '+ ${param.lang}" th:text="${param.lang}">-->
+            <div th:class="'dropbtn ' + (${param.lang} ?: 'default')" th:text="${param.lang} ?: 'EN'">
+                </div>
+            <div class="dropdown-content">
+                <a href="?lang=RU">RU</a>
+                <a href="?lang=HY">HY</a>
+                <a href="?lang=US">US</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

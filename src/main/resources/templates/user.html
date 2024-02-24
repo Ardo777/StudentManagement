@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>Users</title>
+  <link rel="stylesheet" href="/css/language.css">
 </head>
 <body>
 <span th:if="msg != null" style="color: red" th:text="${msg}"></span>
-<th:block th:include="/fragment/headerFragment::userInfo"/>
+<th:block th:insert="~{/fragment/headerFragment::userInfo}"/>
+<th:block th:insert="~{/fragment/langFragment::language}"/>
 Users page | <a href="/user/add">Add User</a> | <a href="/messages/list">Messages</a>
 <table border="1">
   <thead>

@@ -5,7 +5,8 @@
     <title>Fragment</title>
 </head>
 <body>
-<div>
+
+<div style="font-size: 25px">
     <div th:fragment="userInfo">
         <div th:if="${currentUser != null}">
             Welcome <span th:text="${currentUser.name}">)</span> | <a href="/logout">Logout</a><br>

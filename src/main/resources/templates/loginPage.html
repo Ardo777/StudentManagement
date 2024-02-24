@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/language.css">
 </head>
 <body>
-
-<a href="/user/home">Login</a>
-<a href="/user/register">Register</a>
-
+<th:block th:insert="~{/fragment/langFragment::language}"/>
+<div class="container">
+    <a th:text="#{loginPage.login}" class="btn" href="/user/home">Login</a>
+    <a th:text="#{loginPage.register}" class="btn" href="/user/register">Register</a>
+</div>
 </body>
 </html>

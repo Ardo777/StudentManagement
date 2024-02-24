@@ -6,6 +6,7 @@ import com.example.studentmanagement.entity.UserType;
 import com.example.studentmanagement.security.SpringUser;
 import com.example.studentmanagement.service.LessonService;
 import com.example.studentmanagement.service.UserService;
+import com.example.studentmanagement.service.impl.MailServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import java.util.Optional;
 public class UserController {
     private final UserService userService;
     private final LessonService lessonService;
+    private final MailServiceImpl mailService;
 
     @GetMapping("/user/add")
     public String addUserPage(ModelMap modelMap) {
@@ -32,7 +34,7 @@ public class UserController {
     @PostMapping("/user/add")
     public String addUser(@ModelAttribute User user, @RequestParam("picture") MultipartFile multipartFile) throws IOException {
         User save = userService.save(user, multipartFile);
-        if (save==null) {
+        if (save == null) {
             if (user.getUserType() == UserType.TEACHER) {
                 return "redirect:/lesson?msg=User Added";
             }
@@ -43,7 +45,7 @@ public class UserController {
     }
 
     @GetMapping("/user/delete/{id}")
-    public String deleteUser(@PathVariable("id") int id,@AuthenticationPrincipal SpringUser springUser) {
+    public String deleteUser(@PathVariable("id") int id, @AuthenticationPrincipal SpringUser springUser) {
         userService.deleteById(id);
         return "redirect:/";
     }
@@ -78,12 +80,12 @@ public class UserController {
 
     @PostMapping("/user/register")
     public String userRegister(@ModelAttribute User user, @RequestParam("picture") MultipartFile multipartFile) throws IOException {
-        User save = userService.save(user, multipartFile);
-        if (save == null) {
-            return "redirect:/login?msg=Email already in used";
-        }else
-            return "redirect:/user?msg=User registered";
+        User saveUser = userService.save(user, multipartFile);
+
+            return "redirect:/user/register/verification/" + saveUser.getEmail();
+
     }
+
 
     @GetMapping("/user/home")
     public String homePage(@AuthenticationPrincipal SpringUser springUser, ModelMap modelMap) {
@@ -101,6 +103,40 @@ public class UserController {
                 return "user";
             }
         }
+        return "loginPage";
+    }
+
+    @GetMapping("/user/register/verification/{mail}")
+    public String verificationPage(@PathVariable("mail") String mail, ModelMap modelMap) {
+        Optional<User> userOptional = userService.findByEmail(mail);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            modelMap.addAttribute("user", user);
+            mailService.send(mail, "Welcome", String.format("Hi %s  this is your verify code %s ", user.getName(), user.getVerificationCode()));
+        }
+
+        return "mailVerification";
+    }
+
+    @PostMapping("/user/register/verification")
+    public String verification(@RequestParam("id")int id,@RequestParam("verificationCode") String verificationCode){
+
+        Optional<User> byId = userService.findById(id);
+        if (byId.isEmpty()){
+            return "redirect:/404";
+        }
+        User user = byId.get();
+        if (user.getVerificationCode().equals(verificationCode)){
+            return "redirect:/loginPage";
+        }else {
+            userService.deleteById(id);
+            return "redirect:/register";
+        }
+
+    }
+
+    @GetMapping("/loginPage")
+    public String loginPage(){
         return "loginPage";
     }
 }
