@@ -26,6 +26,7 @@ public class SecurityConfig {
                 .requestMatchers("/css/style.css").permitAll()
                 .requestMatchers("/css/404.css").permitAll()
                 .requestMatchers("/css/register.css").permitAll()
+                .requestMatchers("/css/email.css").permitAll()
                 .requestMatchers("/login").permitAll()
                 .requestMatchers("/loginPage").permitAll()
                 .requestMatchers("/user/register/**").permitAll()

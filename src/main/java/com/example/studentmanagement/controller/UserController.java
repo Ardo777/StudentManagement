@@ -112,7 +112,7 @@ public class UserController {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             modelMap.addAttribute("user", user);
-            mailService.send(mail, "Welcome", String.format("Hi %s  this is your verify code %s ", user.getName(), user.getVerificationCode()));
+//            mailService.send(mail, "Welcome", String.format("Hi %s  this is your verify code %s ", user.getName(), user.getVerificationCode()));
         }
 
         return "mailVerification";

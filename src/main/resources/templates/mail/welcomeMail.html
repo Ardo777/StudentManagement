@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+<!--    <link rel="stylesheet" href="/css/email.css">-->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://www.vidyalayaschoolsoftware.com/webassets/images/school_software_3.png');
+            background-size: cover;
+            background-position: center;
+            background-size: 100%;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .verification-code {
+            text-align: center;
+            font-size: 24px;
+            color: #4CAF50;
+            margin-bottom: 30px;
+        }
+
+        .signature {
+            text-align: right;
+            color: #333;
+        }
+
+        .theme-images {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .theme-images img {
+            width: 150px;
+            height: 150px;
+            margin: 0 10px;
+            border-radius: 50%;
+            border: 3px solid #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container" style="width: 500px; height: 800px">
+    <h1>Hi
+        <div th:text="${user.name}"></div>
+        Welcome to our Student Management System!
+    </h1>
+    <p>We're delighted to have you join us.</p>
+    <p>This is your Verification code:</p>
+    <p class="verification-code" th:text="${user.getVerificationCode()}"></p>
+    <p>Our platform offers a comprehensive set of tools for managing student data, tracking progress, and facilitating communication between students, teachers, and administrators.</p>
+    <div class="theme-images">
+        <img src="https://icon-library.com/images/icon-for-student/icon-for-student-6.jpg" alt="Placeholder Image 1">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Student_icon.svg" alt="Placeholder Image 2">
+        <img src="https://www.prchecker.info/free-icons/128x128/student_128_px.png" alt="Placeholder Image 3">
+    </div>
+    <p>Feel free to explore the features and functionalities of our system. If you have any questions or need assistance, don't hesitate to contact us.</p>
+    <p class="signature">Best regards,<br>The Student Management Team</p>
+</div>
+</body>
+</html>
